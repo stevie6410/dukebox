@@ -1,0 +1,28 @@
+<br>
+
+<h2>Dukebox</h2>
+
+<button *ngIf="!user" (click)="login()">Login</button>
+<p *ngIf="!!user">You are logged in as: {{user.display_name}}</p>
+<button *ngIf="user" (click)="logout()">Logout</button>
+
+<br>
+<br>
+
+<div class="form-group">
+  <label>Music Search</label>
+  <input type="text" class="form-control" placeholder="Music Search" name="searchTerm" [(ngModel)]="searchTerm" (keyup.enter)="search()">
+</div>
+
+<h4>Songs</h4>
+
+<ul class="list-unstyled"> 
+  <li class="media" *ngFor="let track of tracks">
+    <h5 class="mt-0 mb-1" *ngIf="isPlaying(track.preview_url)">Playing...</h5>
+    <img class="d-flex mr-3" [src]="track.album.images[2].url" placeholder image (click)="playToggle(track.preview_url)">
+    <div class="media-body">
+      <h5 class="mt-0 mb-1">{{track.name}}</h5>
+      {{track?.artists[0]?.name}}
+    </div>
+  </li>
+</ul>
